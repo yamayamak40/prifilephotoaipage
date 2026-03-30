@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サポート — ProfilePhotoAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --ink: #1a1816;
+    --ink-muted: #6b6560;
+    --ink-faint: #b5b0aa;
+    --accent: #2d5be3;
+    --accent-light: #eef1fd;
+    --border: #e8e4df;
+    --radius: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .app-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .app-name span { font-style: italic; color: var(--accent); }
+
+  .header-sub {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  p { font-size: 0.93rem; color: var(--ink-muted); }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.93rem;
+    color: var(--ink-muted);
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .faq-list { display: flex; flex-direction: column; }
+
+  .faq-item {
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+  }
+
+  .faq-item:first-child { border-top: none; padding-top: 0; }
+  .faq-item:last-child { padding-bottom: 0; }
+
+  .faq-q {
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .faq-q::before {
+    content: 'Q';
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  .faq-a {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    padding-left: 24px;
+  }
+
+  .contact-box {
+    background: var(--accent-light);
+    border: 1px solid #d0d9f8;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-box-text p:first-child {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .contact-box-text a {
+    font-size: 0.97rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .contact-box-text a:hover { color: var(--accent); }
+
+  .contact-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .contact-btn:hover { opacity: 0.85; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .info-tag {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.83rem;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .info-tag::before {
+    content: '·';
+    color: var(--accent);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .privacy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .privacy-link:hover { opacity: 0.75; }
+  .privacy-link::after { content: '↗'; font-size: 0.8rem; }
+
+  footer {
+    text-align: center;
+    padding: 0 24px 48px;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 24px 20px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .contact-box { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="app-name">ProfilePhoto<span>AI</span></div>
+  <p class="header-sub">サポートページ</p>
+</header>
+
+<main>
+
+  <section>
+    <p class="section-label">About</p>
+    <h2>ご利用ありがとうございます</h2>
+    <p>ProfilePhotoAI は、ユーザーが用意した写真をもとにプロフィール写真の生成・調整を行うアプリです。本ページではサポート情報をご案内します。</p>
+    <ul class="feature-list" style="margin-top: 20px;">
+      <li>プロフィール写真の生成</li>
+      <li>生成画像の再生成・調整</li>
+      <li>チケット購入による生成回数の追加</li>
+      <li>生成画像の保存</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="section-label">FAQ</p>
+    <h2>よくあるお問い合わせ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <p class="faq-q">画像生成に時間がかかることがあります</p>
+        <p class="faq-a">通信状況や混雑状況により、生成完了まで数分かかる場合があります。しばらく待ってから再度お試しください。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">チケットが反映されません</p>
+        <p class="faq-a">購入後すぐに反映されない場合があります。時間をおいて再度ご確認ください。それでも解消しない場合はお問い合わせください。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">写真を保存できません</p>
+        <p class="faq-a">端末の写真アクセス権限が必要です。iPhone の「設定」→「ProfilePhotoAI」→「写真」からアクセスを許可してください。</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">アプリが正常に動作しません</p>
+        <p class="faq-a">アプリの再起動、通信環境の確認、最新版へのアップデートをお試しください。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Contact</p>
+    <h2>お問い合わせ</h2>
+    <p style="margin-bottom: 20px;">不具合報告・ご意見・ご質問は以下までご連絡ください。</p>
+    <div class="contact-box">
+      <div class="contact-box-text">
+        <p>メールアドレス</p>
+        <a href="mailto:yamayamak40@gmail.com">yamayamak40@gmail.com</a>
+      </div>
+      <a href="mailto:yamayamak40@gmail.com" class="contact-btn">メールを送る</a>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">お願い</p>
+    <h2>ご連絡の際にお知らせください</h2>
+    <p style="margin-bottom: 16px;">可能であれば以下の情報をご記載いただくと、よりスムーズにご対応できます。</p>
+    <div class="info-grid">
+      <div class="info-tag">ご利用端末</div>
+      <div class="info-tag">iOS バージョン</div>
+      <div class="info-tag">アプリバージョン</div>
+      <div class="info-tag">発生した事象</div>
+      <div class="info-tag" style="grid-column: 1 / -1;">発生時の画面・操作内容</div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Privacy</p>
+    <h2>プライバシーポリシー</h2>
+    <p style="margin-bottom: 16px;">個人情報の取り扱いについては、プライバシーポリシーをご確認ください。</p>
+    <a href="https://yamayamak40.github.io/prifilephotoaipage/privacy" target="_blank" class="privacy-link">プライバシーポリシーを確認する</a>
+  </section>
+
+</main>
+
+<footer>最終更新日：2026年3月23日</footer>
+
+</body>
+</html>
